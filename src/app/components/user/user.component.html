@@ -1,0 +1,4 @@
+<div class="products-flex">
+    <app-product-types class="product-types" (productsOut)="productsOut($event)" (productTypeSelectedOut)="productTypeSelectedOut($event)"></app-product-types>
+    <app-products class="product-list" [productsIn]="products" [productTypeSelectedIn]="productTypeSelected"></app-products>
+</div>

@@ -1,0 +1,11 @@
+<div class="menu-product-types">
+    <ul class="product-types-list" *ngIf="productTypes.length > 0 else cargando">
+        <input class="product-search" type="search" name="buscarProducto" id="buscarProducto" placeholder="Buscar Producto" [(ngModel)]="searchProduct" (keyup)="searchProducts()" >
+        <li class="product-type-item" *ngFor="let productType of productTypes">
+            <button class="product-type-button" (click)="getProducts(productType)" [class.product-selected]="productType.name == productTypeSelected">{{productType.name}}</button>
+        </li>
+    </ul>
+    <ng-template #cargando>
+        <div class="loading"></div>
+    </ng-template>
+</div>
