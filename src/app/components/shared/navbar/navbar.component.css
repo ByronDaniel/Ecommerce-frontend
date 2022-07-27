@@ -30,6 +30,7 @@
     color: white;
     text-decoration: none;
     display: inline-block;
+    margin-left: 5px;
 }
 .navbar-link:hover{
     background-color: white;

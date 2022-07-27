@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IDeliveryMethods } from 'src/app/models/IDeliveryMethod';
 import { IOrderShow } from 'src/app/models/IOrderShow';
 import { HttpService } from 'src/app/services/http.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-my-cart',
@@ -38,22 +39,69 @@ export class MyCartComponent implements OnInit {
         console.log(this.order);
       });
     }else{
-      console.log('No existen productos agregados a la orden');
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'No hay productos agregados',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.router.navigate(['/products']);
     }
   }
 
   cancelOrder(){
-    this.httpService.put(`Order/Cancel/${this.orderId}`).subscribe(response=>{
-      localStorage.removeItem('orderId');
-      this.router.navigate([''], { relativeTo: this.route });
+    Swal.fire({
+      title: 'Estás seguro de cancelar la orden?',
+      text: "No podras recuperarla",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#d33',
+      cancelButtonText: 'Mantener Orden',
+      confirmButtonText: 'Cancelar Orden'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.httpService.put(`Order/Cancel/${this.orderId}`).subscribe(response=>{
+          localStorage.removeItem('orderId');
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Orden Cancelada',
+            showConfirmButton: false,
+            timer: 1000
+          });
+          this.router.navigate(['/products']);
+        });
+      }
     });
   }
 
   payOrder(){
-    this.httpService.put(`Order/Pay/${this.orderId}/DeliveryMethod/${this.deliveryMethodId}`).subscribe(response=>{
-      console.log('pagado');
+    Swal.fire({
+      title: 'Pago Total',
+      text: `$${this.order.totalPrice}`,
+      icon: 'success',
+      confirmButtonColor: '#5BB318',
+      cancelButtonColor: '#D61C4E',
+      confirmButtonText: 'Pagar',
+      cancelButtonText: 'Regresar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        this.httpService.put(`Order/Pay/${this.orderId}/DeliveryMethod/${this.deliveryMethodId}`).subscribe(response=>{
+          console.log('pagado');
       localStorage.removeItem('orderId');
-      this.router.navigate([''], { relativeTo: this.route });
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Compra realizada',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      this.router.navigate(['/products']);
     });
+  }
+});
   }
 }

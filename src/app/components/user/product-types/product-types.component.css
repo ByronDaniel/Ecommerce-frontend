@@ -39,10 +39,29 @@
 .product-search{
     display: block;
     border: none;
-    padding: 5px 0px;
-    text-align: center;
-    border-radius: 5px;
-    margin-bottom: 5px;
+    text-align: left;
+    padding: 1px 6px;
+    background-color: transparent;
+    text-transform: uppercase;
+    width: 120px;
+}
+
+.product-search::placeholder{
+    color: inherit;
+    font-size: inherit;
+    font-weight: 300;
+}
+
+.product-search:focus{
+    outline: none;
+}
+.fa-magnifying-glass{
+    font-size: 0.8rem;
+}
+.search-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .loading{

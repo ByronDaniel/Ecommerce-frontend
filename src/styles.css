@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --primary-color: rgb(40, 146, 203);
+    --color-pichincha-amarillo: #FFDD00;
+    --color-pichincha-azul:#0F265C;
 }
 
 *{
@@ -15,6 +17,7 @@ body{
 img{
     width: 100%;
     object-fit: cover;
+    
 }
 
 .container{

@@ -11,9 +11,12 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ProductFormComponent } from './components/admin/product-form/product-form.component';
 import { ProductListComponent } from './components/admin/product-list/product-list.component';
 import { FormsModule } from '@angular/forms';
-import { routing } from './app.routing';
 import { ProductInfoComponent } from './components/user/products/product-info/product-info.component';
 import { MyCartComponent } from './components/user/my-cart/my-cart.component';
+import { LoginComponent } from './components/shared/login/login.component';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './app.routing';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,13 +28,14 @@ import { MyCartComponent } from './components/user/my-cart/my-cart.component';
     ProductFormComponent,
     ProductListComponent,
     ProductInfoComponent,
-    MyCartComponent
+    MyCartComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    routing
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

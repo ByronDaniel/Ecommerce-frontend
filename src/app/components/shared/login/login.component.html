@@ -1,0 +1,24 @@
+<div class="login">
+    <div class="contenedor-login">
+        <div class="centrar-login">
+            <h1 class="login-titulo">Banco Pichincha</h1>
+            <form>
+                <div class="input-usuario">
+                    <label class="login-label" for="inputUsuario">Usuario</label>
+                    <input class="login-input" type="text" name="usuario" placeholder="Ingresa el usuario"
+                        id="inputUsuario" />
+                    <span class="login-alert" id="alertUsuario"></span>
+                </div>
+                <div class="input-usuario">
+                    <label class="login-label" for="inputContrasena">Contraseña</label>
+                    <input class="login-input" type="password" name="contraseña" placeholder="Ingresa la contraseña"
+                        id="inputContrasena" />
+                    <span class="login-alert" id="alertContrasena"></span>
+                </div>
+                <button class="login-button" id="botonIniciarSesion" (click)="login()">
+                    <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

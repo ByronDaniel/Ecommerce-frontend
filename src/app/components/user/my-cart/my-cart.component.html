@@ -21,7 +21,8 @@
                 </td>
                 <td>
                     <select name="deliveryMethod" id="deliveryMethod" class="deliveryMethod" [(ngModel)]="deliveryMethodId">
-                        <option *ngFor="let deliveryMethod of deliveryMethods" value="{{deliveryMethod.id}}">${{deliveryMethod.priceByKm}} {{deliveryMethod.name}}</option>
+                        <option value="" [defaultSelected]="true">Seleccione...</option>
+                            <option *ngFor="let deliveryMethod of deliveryMethods" value="{{deliveryMethod.id}}">${{deliveryMethod.priceByKm}} {{deliveryMethod.name}}</option>
                     </select>
                 </td>
             </tr>

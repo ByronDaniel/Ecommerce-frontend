@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http.service';
 import { IOrder } from 'src/app/models/IOrder';
 import { IAddProductCart } from 'src/app/models/IAddProductCart';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-product-info',
   templateUrl: './product-info.component.html',
@@ -50,14 +50,26 @@ export class ProductInfoComponent implements OnInit {
         localStorage.setItem('orderId', orderNew);
         
         this.httpService.post(`Order/${orderNew}/Product`,this.addProduct).subscribe(response=>{
-          console.log('producto agregado con exito a la orden nueva!');
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Agregado al Carrito',
+            showConfirmButton: false,
+            timer: 1000
+          });
         });
       });
     }else{
       this.httpService.post(`Order/${orderId}/Product`,this.addProduct).subscribe(response=>{
-        console.log('producto agregado con exito a la orden existente!');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Agregado al Carrito',
+          showConfirmButton: false,
+          timer: 1000
+        });
       });
     }
-    this.router.navigate([''], { relativeTo: this.route });
+    this.router.navigate(['/products']);
   }
 }
