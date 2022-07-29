@@ -1,3 +1,5 @@
+import { OrderProduct } from "./OrderProduct";
+
 export interface IOrderShow{
     id: string,
     orderProducts: OrderProduct[],
@@ -7,12 +9,4 @@ export interface IOrderShow{
     iva: number,
     totalPrice: number,
     state: string
-}
-
-interface OrderProduct{
-    product: string,
-    imageUrl: string,
-    price: number,
-    productQuantity: number,
-    total: number
 }

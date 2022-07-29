@@ -21,11 +21,13 @@
 }
 .order-detail{
     width: 60%;
+    margin-left: 10px;
 }
 .order-img{
-    width: 100px;
+    max-width: 40%;
     height: auto;
     margin: auto;
+    border-radius: 5px;
 }
 .order-pay{
     width: max-content;
@@ -81,4 +83,26 @@
     border: none;
     width: max-content;
     font-size: 0.9rem;
+}
+
+.btn-remove-product{
+    background-color: transparent;
+    color: red;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: none;
+    padding: 0;
+    transition: 0.4s;
+}
+
+.btn-remove-product:hover{
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.field-obligatorio{
+    color: red;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: bold;
 }

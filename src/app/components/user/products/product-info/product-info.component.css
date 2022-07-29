@@ -1,14 +1,16 @@
 .product-info{
-    padding: 20px 40px;
+    padding: 20px 20px;
     background-color: white;
     position: relative;
     top: 60px;
     border: 1px solid rgba(0, 0, 0, 0.374);
     border-radius: 5px;
     display: flex;
+    align-items: center;
 }
 .product-img{
     max-width: 500px;
+    max-height: 500px;
 }
 .product-details{
     padding: 20px;
@@ -58,6 +60,6 @@
     color: rgb(30, 30, 30);
 }
 .span-product{
-    position: absolute;
+    position: relative;
     color: rgb(39, 39, 39);
 }

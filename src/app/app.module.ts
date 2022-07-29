@@ -8,14 +8,15 @@ import { ProductTypesComponent } from './components/user/product-types/product-t
 import { UserComponent } from './components/user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './components/admin/admin.component';
-import { ProductFormComponent } from './components/admin/product-form/product-form.component';
-import { ProductListComponent } from './components/admin/product-list/product-list.component';
-import { FormsModule } from '@angular/forms';
+import { ProductFormComponent } from './components/admin/product-admin/product-form/product-form.component';
+import { ProductListComponent } from './components/admin/product-admin/product-list/product-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductInfoComponent } from './components/user/products/product-info/product-info.component';
 import { MyCartComponent } from './components/user/my-cart/my-cart.component';
 import { LoginComponent } from './components/shared/login/login.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routing';
+import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +30,14 @@ import { appRoutes } from './app.routing';
     ProductListComponent,
     ProductInfoComponent,
     MyCartComponent,
-    LoginComponent
+    LoginComponent,
+    ProductAdminComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

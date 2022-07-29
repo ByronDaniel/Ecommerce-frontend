@@ -30,7 +30,7 @@ export class ProductTypesComponent implements OnInit {
   }
   
   getProducts(productType: IProductType){
-    this.httpService.get(`Product?search=${productType.id}&sort=Name&order=Asc&limit=5&offset=0`).subscribe((response)=>{
+    this.httpService.get(`Product?search=${productType.id}&sort=Name&order=Asc&limit=3&offset=0`).subscribe((response)=>{
       this.products = response as IProduct[];
       this.productTypeSelected = productType.name;
       this.productTypeSelectedOut.emit(productType.name);

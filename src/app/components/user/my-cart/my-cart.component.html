@@ -10,7 +10,14 @@
                 <h3 class="cart-title">{{product.product}}</h3>
                 <p><b>Precio:</b> {{product.price}}</p>
                 <hr>
-                <span>Total <b>{{product.productQuantity}}</b> unidades: </span> ${{product.total}}
+                <span>Total <b>
+                    <select class="input-quantity" name="quantity" (change)="updateQuantity(product,quantitySelected.value)" #quantitySelected>
+                        <option *ngFor="let quantity of product.stockArray" value="{{quantity}}" [defaultSelected]="product.productQuantity == quantity">{{quantity}}</option>
+                    </select>                
+                </b> unidades: </span> ${{product.total}}
+                <div>
+                    <button class="btn-remove-product" (click)="removeProduct(product)">Remover Producto</button>
+                </div>
             </div>
         </div>
     </div>

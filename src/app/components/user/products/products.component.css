@@ -30,9 +30,9 @@
     left: 50%;
     transform: translateX(-50%);
     border-radius: 5px;
-    height: 200px;
-    width: auto;
-    margin: 10px;
+    height: 250px;
+    width: 90%;
+    margin: 10px auto;
 }
 .product-title{
     text-align: center;
