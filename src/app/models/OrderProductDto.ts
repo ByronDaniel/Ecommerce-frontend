@@ -1,4 +1,4 @@
-export interface IAddProductCart{
+export interface OrderProductDto{
     productId:string,
     productQuantity: number
 }

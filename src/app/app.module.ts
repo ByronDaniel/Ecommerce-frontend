@@ -17,6 +17,9 @@ import { LoginComponent } from './components/shared/login/login.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routing';
 import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
+import { BrandAdminComponent } from './components/admin/brand-admin/brand-admin.component';
+import { BrandListComponent } from './components/admin/brand-admin/brand-list/brand-list.component';
+import { BrandFormComponent } from './components/admin/brand-admin/brand-form/brand-form.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +34,11 @@ import { ProductAdminComponent } from './components/admin/product-admin/product-
     ProductInfoComponent,
     MyCartComponent,
     LoginComponent,
-    ProductAdminComponent
-  ],
+    ProductAdminComponent,
+    BrandAdminComponent,
+    BrandListComponent,
+    BrandFormComponent
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,

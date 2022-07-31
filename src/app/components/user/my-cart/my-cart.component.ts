@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IDeliveryMethods } from 'src/app/models/IDeliveryMethod';
-import { IOrderShow } from 'src/app/models/IOrderShow';
-import { IProduct } from 'src/app/models/IProduct';
+import { DeliveryMethod } from 'src/app/models/DeliveryMethod';
+import { OrderDto } from 'src/app/models/OrderDto';
+import { Product } from 'src/app/models/Product';
 import { OrderProduct } from 'src/app/models/OrderProduct';
 import { OrderProductQuantity } from 'src/app/models/OrderProductQuantity';
-import { HttpService } from 'src/app/services/http.service';
+import { EcommerceService } from 'src/app/services/ecommerce.service';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -16,10 +16,10 @@ import Swal from 'sweetalert2'
 export class MyCartComponent implements OnInit {
   orderId: string = '';
   stock: number [] = [];
-  order!: IOrderShow;
+  order!: OrderDto;
   deliveryMethodId: string = "";
-  deliveryMethods: IDeliveryMethods[] = [];
-  constructor(private httpService: HttpService, private router: Router, private route: ActivatedRoute) { 
+  deliveryMethods: DeliveryMethod[] = [];
+  constructor(private httpService: EcommerceService, private router: Router, private route: ActivatedRoute) { 
 
   }
 
@@ -32,14 +32,14 @@ export class MyCartComponent implements OnInit {
   getDeliveryMethods(){
     this.httpService.get('DeliveryMethod?sort=Name&order=Asc&offset=0').subscribe(
       response=>{
-        this.deliveryMethods = response as IDeliveryMethods[];
+        this.deliveryMethods = response as DeliveryMethod[];
       }
     )
   }
   getOrder(){
     if(this.orderId != null || this.orderId != undefined){
       this.httpService.get(`Order/Show/${this.orderId}`).subscribe(response=>{
-        this.order = response as IOrderShow;
+        this.order = response as OrderDto;
         if(this.order.orderProducts.length == 0){
           Swal.fire({
             position: 'center',

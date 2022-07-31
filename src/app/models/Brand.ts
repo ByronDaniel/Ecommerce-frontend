@@ -1,4 +1,4 @@
-export interface IProductType
+export interface Brand
 {
     id: string,
     name: string

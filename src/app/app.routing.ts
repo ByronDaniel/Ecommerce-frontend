@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
+import { BrandAdminComponent } from './components/admin/brand-admin/brand-admin.component';
 import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
 import { ProductFormComponent } from './components/admin/product-admin/product-form/product-form.component';
 import { LoginComponent } from './components/shared/login/login.component';
@@ -16,5 +17,6 @@ export const appRoutes: Routes = [
     { path: 'admin', component: AdminComponent },
     { path: 'admin/products', component: ProductAdminComponent },
     { path: 'admin/products/edit/:id', component: ProductFormComponent },
-    { path: 'admin/products/create', component: ProductFormComponent }
+    { path: 'admin/products/create', component: ProductFormComponent },
+    { path: 'admin/brands', component: BrandAdminComponent}
 ];

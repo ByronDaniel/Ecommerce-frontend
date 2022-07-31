@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from 'src/app/models/IProduct';
-import { HttpService } from 'src/app/services/http.service';
+import { Product } from 'src/app/models/Product';
+import { EcommerceService } from 'src/app/services/ecommerce.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,8 +8,8 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: IProduct[] = [];
-  constructor(private httpService: HttpService) { }
+  products: Product[] = [];
+  constructor(private httpService: EcommerceService) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
   
   getProducts(){
     this.httpService.get('Product?limit=3&offset=0&sort=Name&order=asc').subscribe(response=>{
-      this.products = response as IProduct [];
+      this.products = response as Product [];
     });
   }
 
@@ -27,7 +27,7 @@ export class ProductListComponent implements OnInit {
     })
   }
 
-  productNewOut(product: IProduct){
+  productNewOut(product: Product){
     this.products.push(product);
   }
 }

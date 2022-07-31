@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from 'src/app/models/IProduct';
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-user',
@@ -7,13 +7,13 @@ import { IProduct } from 'src/app/models/IProduct';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  products : IProduct[] = [];
+  products : Product[] = [];
   productTypeSelected: string = "";
   constructor() { }
 
   ngOnInit(): void {
   }
-  productsOut(products : IProduct[]){
+  productsOut(products : Product[]){
     this.products = products;
   }
   productTypeSelectedOut(name: string){

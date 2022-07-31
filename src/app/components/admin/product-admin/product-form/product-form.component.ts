@@ -2,10 +2,10 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
-import { IBrand } from 'src/app/models/IBrand';
-import { IProduct } from 'src/app/models/IProduct';
-import { IProductType } from 'src/app/models/IProductType';
-import { HttpService } from 'src/app/services/http.service';
+import { Brand } from 'src/app/models/Brand';
+import { Product } from 'src/app/models/Product';
+import { ProductType } from 'src/app/models/ProductType';
+import { EcommerceService } from 'src/app/services/ecommerce.service';
 
 @Component({
   selector: 'app-product-form',
@@ -14,12 +14,12 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class ProductFormComponent implements OnInit {
   formGroupProduct!: FormGroup;
-  product!: IProduct;
-  productTypes : IProductType [] = [];
-  brands : IBrand [] = [];
+  product!: Product;
+  productTypes : ProductType [] = [];
+  brands : Brand [] = [];
   productId!: string;
   @Output() productNewOut = new EventEmitter();
-  constructor(private httpService : HttpService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) { 
+  constructor(private httpService : EcommerceService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) { 
   }
 
   ngOnInit(): void {
@@ -30,20 +30,20 @@ export class ProductFormComponent implements OnInit {
 
   getProductTypes(){
     this.httpService.get('ProductType?sort=Name&order=Asc&offset=0').subscribe(response =>{
-      this.productTypes = response as IProductType[];
+      this.productTypes = response as ProductType[];
     });
   }
   
   getBrands(){
     this.httpService.get('Brand?sort=Name&order=Asc&offset=0').subscribe(response =>{
-      this.brands = response as IBrand[];
+      this.brands = response as Brand[];
     })
   }
 
-  addProduct(product: IProduct){
+  addProduct(product: Product){
     this.httpService.post('Product',this.formGroupProduct.getRawValue()).subscribe(response =>{
       this.httpService.get(`Brand/${product.brandId}`).subscribe((response)=>{
-        let brand = response as IBrand;
+        let brand = response as Brand;
         product.brand = brand.name;
       })
       this.productNewOut.emit(product);
@@ -105,7 +105,7 @@ export class ProductFormComponent implements OnInit {
   getProduct(id: string){
     this.httpService.get(`Product/${id}`).subscribe(
       response =>{
-        this.product = response as IProduct;
+        this.product = response as Product;
         debugger;
         this.formGroupProduct = this.formBuilder.group({
           id: [this.product.id,[Validators.required]],

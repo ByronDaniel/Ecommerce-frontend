@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from 'src/app/models/IProduct';
+import { Product } from 'src/app/models/Product';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpService } from 'src/app/services/http.service';
-import { IOrder } from 'src/app/models/IOrder';
-import { IAddProductCart } from 'src/app/models/IAddProductCart';
+import { EcommerceService } from 'src/app/services/ecommerce.service';
+import { Order } from 'src/app/models/Order';
+import { OrderProductDto } from 'src/app/models/OrderProductDto';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-product-info',
@@ -11,20 +11,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./product-info.component.css']
 })
 export class ProductInfoComponent implements OnInit {
-  productSelected!: IProduct;
+  productSelected!: Product;
   stock: number [] = [];
-  addProduct : IAddProductCart = {
+  addProduct : OrderProductDto = {
     productId: "",
     productQuantity: 1
   };
-  constructor(private route: ActivatedRoute, private router: Router, private httpService: HttpService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private httpService: EcommerceService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(param =>{
       let id = param['id'];
       this.httpService.get(`Product/${id}`).subscribe(
         response =>{
-          this.productSelected = response as IProduct;
+          this.productSelected = response as Product;
           this.getStock(this.productSelected.stock);
         }
       )
@@ -45,7 +45,7 @@ export class ProductInfoComponent implements OnInit {
 
     if(orderId == null){
       this.httpService.post('Order').subscribe(response=>{
-        let responseOrder = response as IOrder;
+        let responseOrder = response as Order;
         let orderNew = responseOrder.id;
         localStorage.setItem('orderId', orderNew);
         

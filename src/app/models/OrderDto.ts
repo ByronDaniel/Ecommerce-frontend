@@ -1,6 +1,6 @@
 import { OrderProduct } from "./OrderProduct";
 
-export interface IOrderShow{
+export interface OrderDto{
     id: string,
     orderProducts: OrderProduct[],
     deliveryMethod: string,

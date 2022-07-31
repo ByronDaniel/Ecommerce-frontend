@@ -1,4 +1,4 @@
-export interface IProduct{
+export interface Product{
     brand?: string,
     description: string,
     id?: string,
