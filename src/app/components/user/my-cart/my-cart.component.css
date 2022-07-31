@@ -5,6 +5,7 @@
 }
 .cart-title{
     color: var(--primary-color);
+    margin-bottom: 0;
 }
 .cart-products{
     width: 40%;
@@ -105,4 +106,10 @@
     display: block;
     font-size: 0.8rem;
     font-weight: bold;
+}
+
+.btn-show-product{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 0.9rem;
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -20,7 +20,8 @@ import { ProductAdminComponent } from './components/admin/product-admin/product-
 import { BrandAdminComponent } from './components/admin/brand-admin/brand-admin.component';
 import { BrandListComponent } from './components/admin/brand-admin/brand-list/brand-list.component';
 import { BrandFormComponent } from './components/admin/brand-admin/brand-form/brand-form.component';
-
+import { AuthService } from './auth/auth.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { BrandFormComponent } from './components/admin/brand-admin/brand-form/br
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [AuthService,{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,7 @@ import { EcommerceService } from 'src/app/services/ecommerce.service';
 import { Order } from 'src/app/models/Order';
 import { OrderProductDto } from 'src/app/models/OrderProductDto';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-product-info',
   templateUrl: './product-info.component.html',
@@ -17,7 +18,7 @@ export class ProductInfoComponent implements OnInit {
     productId: "",
     productQuantity: 1
   };
-  constructor(private route: ActivatedRoute, private router: Router, private httpService: EcommerceService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private httpService: EcommerceService, private location: Location) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(param =>{
@@ -70,6 +71,6 @@ export class ProductInfoComponent implements OnInit {
         });
       });
     }
-    this.router.navigate(['/products']);
+    this.location.back();
   }
 }

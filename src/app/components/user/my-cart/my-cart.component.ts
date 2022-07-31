@@ -17,7 +17,7 @@ export class MyCartComponent implements OnInit {
   orderId: string = '';
   stock: number [] = [];
   order!: OrderDto;
-  deliveryMethodId: string = "";
+  deliveryMethod: string = "";
   deliveryMethods: DeliveryMethod[] = [];
   constructor(private httpService: EcommerceService, private router: Router, private route: ActivatedRoute) { 
 
@@ -74,13 +74,11 @@ export class MyCartComponent implements OnInit {
   cancelOrder(){
     Swal.fire({
       title: 'Estás seguro de cancelar la orden?',
-      text: "No podras recuperarla",
       icon: 'warning',
-      showCancelButton: true,
-      cancelButtonColor: '#3085d6',
       confirmButtonColor: '#d33',
-      cancelButtonText: 'Mantener Orden',
-      confirmButtonText: 'Cancelar Orden'
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, cancelar',
+      cancelButtonText: 'No, regresar'
     }).then((result) => {
       if (result.isConfirmed) {
         this.httpService.put(`Order/Cancel/${this.orderId}`).subscribe(response=>{
@@ -99,21 +97,19 @@ export class MyCartComponent implements OnInit {
   }
 
   payOrder(){
-    if(this.deliveryMethodId != ""){
-
+    if(this.deliveryMethod){
+      let deliveryMethodPrice = this.deliveryMethods.filter(d=> d.id == this.deliveryMethod)[0].priceByKm; 
       Swal.fire({
-        title: 'Pago Total',
-      text: `$${this.order.totalPrice}`,
+      title: 'Confirmar Pago',
+      text: `$${this.order.totalPrice + deliveryMethodPrice} dólares`,
       icon: 'success',
       confirmButtonColor: '#5BB318',
       cancelButtonColor: '#D61C4E',
       confirmButtonText: 'Pagar',
       cancelButtonText: 'Regresar',
     }).then((result) => {
-      if (result.isConfirmed) {
-        
-        this.httpService.put(`Order/Pay/${this.orderId}/DeliveryMethod/${this.deliveryMethodId}`).subscribe(response=>{
-          console.log('pagado');
+      if (result.isConfirmed) {  
+        this.httpService.put(`Order/Pay/${this.orderId}/DeliveryMethod/${this.deliveryMethod}`).subscribe(response=>{
       localStorage.removeItem('orderId');
       Swal.fire({
         position: 'center',
