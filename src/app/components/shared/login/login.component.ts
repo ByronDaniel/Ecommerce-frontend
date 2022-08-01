@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildFormGroupLogin();
-    alert('USUARIOS PARA AUTENTICARSE:\nUsuario: Byron, Contraseña: 123\nUsuario: Maria, Contraseña: MiContrasena\nUsuario: Evelyn, Contraseña: Eve123');
+    // alert('USUARIOS PARA AUTENTICARSE:\nUsuario: Byron, Contraseña: 123\nUsuario: Maria, Contraseña: MiContrasena\nUsuario: Evelyn, Contraseña: Eve123');
   }
 
   login(loginBody:Login){

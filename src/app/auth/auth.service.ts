@@ -19,9 +19,7 @@ export class AuthService {
     }
 
     login(loginBody: Login) {
-        return this.http.post(`${this.API_URL}Token`, loginBody).pipe(
-            catchError(async error => await this.errorHandler(error))
-        )
+        return this.http.post(`${this.API_URL}Token`, loginBody)
         .subscribe(res=>{
             this.token = res as TokenDto;
             this.setSession(this.token.token);
@@ -37,22 +35,6 @@ export class AuthService {
         localStorage.removeItem("id_token");
         this.router.navigate(['/login']);
     }
-    
-    errorHandler(error: HttpErrorResponse) {
-        if(error.status == 0){
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: `Error en la conexion del servidor`
-              });
-        }else{
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              text: `${error.error.detail}`
-            });
-        }
-      }
 
     isAuthenticated(): boolean {
         const token = localStorage.getItem('id_token');

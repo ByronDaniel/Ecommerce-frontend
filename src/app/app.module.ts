@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './components/user/products/products.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { NavbarComponent } from './components/user/navbar/navbar.component';
 import { ProductTypesComponent } from './components/user/product-types/product-types.component';
 import { UserComponent } from './components/user/user.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminComponent } from './components/admin/admin.component';
 import { ProductFormComponent } from './components/admin/product-admin/product-form/product-form.component';
 import { ProductListComponent } from './components/admin/product-admin/product-list/product-list.component';
@@ -22,6 +22,8 @@ import { BrandListComponent } from './components/admin/brand-admin/brand-list/br
 import { BrandFormComponent } from './components/admin/brand-admin/brand-form/brand-form.component';
 import { AuthService } from './auth/auth.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,8 +49,13 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService,{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService],
+  providers: [
+    AuthService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
+    {provide:HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
