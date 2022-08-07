@@ -48,7 +48,7 @@ export class MyCartComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          this.router.navigate(['/products']);
+          this.router.navigate(['/ecommerce/products']);
         }else{
           this.order.orderProducts.forEach(product => {
             this.stock = [];
@@ -67,7 +67,7 @@ export class MyCartComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       });
-      this.router.navigate(['/products']);
+      this.router.navigate(['/ecommerce/products']);
     }
   }
 
@@ -90,7 +90,7 @@ export class MyCartComponent implements OnInit {
             showConfirmButton: false,
             timer: 1000
           });
-          this.router.navigate(['/products']);
+          this.router.navigate(['/ecommerce/products']);
         });
       }
     });
@@ -118,7 +118,7 @@ export class MyCartComponent implements OnInit {
         showConfirmButton: false,
         timer: 1000
       });
-      this.router.navigate(['/products']);
+      this.router.navigate(['/ecommerce/products']);
     });
   }
 });

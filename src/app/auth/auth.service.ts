@@ -19,19 +19,23 @@ export class AuthService {
 
     }
 
-    login(loginBody: Login) {
+    login(loginBody: Login, rol: string) {
         this.loaderService.loaderState();
         return this.http.post(`${this.API_URL}Token`, loginBody)
         .subscribe(res=>{
             this.token = res as TokenDto;
             this.setSession(this.token.token);
+            if(rol == 'user'){
+                this.router.navigate(['/ecommerce/products']);
+            }else if(rol == 'admin'){
+                this.router.navigate(['/admin']);
+            }
             this.loaderService.loaderState(false);
         });
     }
           
     private setSession(authResult: any) {
         localStorage.setItem('id_token', authResult);
-        this.router.navigate(['/products']);
     }          
 
     logout() {

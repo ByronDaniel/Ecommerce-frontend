@@ -1,23 +1,29 @@
-<h1 class="product-page-title" *ngIf="productsIn.length > 0 else titleNotProducts">{{productTypeSelectedIn}}</h1>
-<ng-template #titleNotProducts>
-    <h1 class="product-page-title">PRODUCTOS NO DISPONIBLES</h1>
-</ng-template>
-<hr>
-<div class="product-cards" *ngIf="productsIn.length > 0; else notExistProducts">
-    <a class="product-card" *ngFor="let product of productsIn"  [routerLink]="['/product',product.id]">
-        <img class="product-img" src="{{product.imageUrl}}" onerror="src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfDKQDSy8e-KJIHnylQr4ZnTNQtAA-xs986A&usqp=CAU'">
-        <div class="product-body">
-            <h3 class="product-title"><span>{{product.brand}}</span> {{product.name}}</h3>
-            <p class="product-description">{{product.description}}</p>
-            <span class="product-btn" *ngIf="product.stock > 0 else agotado">${{product.price}}</span>
-            <ng-template #agotado>
-            <span class="product-btn">Agotado</span>
-            </ng-template>
+<div class="products-flex content">
+    <app-product-types class="product-types" (productsOut)="productsOut($event)" (productTypeSelectedOut)="productTypeSelectedOut($event)"></app-product-types>
+    <div class="product-list">        
+        <h1 class="product-page-title" *ngIf="products.length > 0 else titleNotProducts">{{productTypeSelected}}</h1>
+        <ng-template #titleNotProducts>
+            <h1 class="product-page-title">PRODUCTOS NO DISPONIBLES</h1>
+        </ng-template>
+        <hr>
+        <div class="product-cards" *ngIf="products.length > 0; else notExistProducts">
+            <a class="product-card" *ngFor="let product of products"  [routerLink]="['/ecommerce/product',product.id]">
+                <img class="product-img" src="{{product.imageUrl}}" onerror="src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfDKQDSy8e-KJIHnylQr4ZnTNQtAA-xs986A&usqp=CAU'">
+                <div class="product-body">
+                    <h3 class="product-title"><span>{{product.brand}}</span> {{product.name}}</h3>
+                    <p class="product-description">{{product.description}}</p>
+                    <span class="product-btn" *ngIf="product.stock > 0 else agotado">${{product.price}}</span>
+                    <ng-template #agotado>
+                        <span class="product-btn">Agotado</span>
+                    </ng-template>
+                </div>
+            </a>
         </div>
-    </a>
-</div>
-<ng-template #notExistProducts>
-    <div class="loading-div">
-        <div class="loading"></div>
+        <ng-template #notExistProducts>
+            <div class="loading-div">
+                <div class="loading"></div>
+            </div>
+        </ng-template>
+        
     </div>
-</ng-template>
+</div>

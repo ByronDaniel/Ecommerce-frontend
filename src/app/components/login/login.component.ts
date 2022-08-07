@@ -13,21 +13,22 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class LoginComponent implements OnInit {
   formGroupLogin!: FormGroup;
   passwordMessage: string = "";
-  constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder ) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
     this.buildFormGroupLogin();
     // alert('USUARIOS PARA AUTENTICARSE:\nUsuario: Byron, Contraseña: 123\nUsuario: Maria, Contraseña: MiContrasena\nUsuario: Evelyn, Contraseña: Eve123');
   }
 
-  login(loginBody:Login){
-    this.authService.login(loginBody);
+  login(loginBody:Login, rol: string){
+    this.authService.login(loginBody, rol);
   }
 
   buildFormGroupLogin(){
     this.formGroupLogin = this.formBuilder.group({
       userName: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      rol: ['user', Validators.required]
     });
   }
 
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     console.log(this.formGroupLogin)
     if(this.formGroupLogin.valid){
-      this.login(this.formGroupLogin.getRawValue());
+      this.login(this.formGroupLogin.getRawValue(),this.formGroupLogin.get("rol")?.value);
     }
   }
 }

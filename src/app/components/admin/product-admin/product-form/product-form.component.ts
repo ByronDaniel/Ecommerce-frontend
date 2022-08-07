@@ -105,7 +105,6 @@ export class ProductFormComponent implements OnInit {
     }else{
       if(this.formGroupProduct.valid){
         this.addProduct(this.formGroupProduct.value);
-        this.formGroupProduct.reset();
       }
     }
   }

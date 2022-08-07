@@ -16,6 +16,15 @@
                     <span class="login-alert" id="alertContrasena" *ngIf="passwordField?.invalid && (passwordField?.touched || loginForm.submitted)">Requerido</span>
                     <span class="login-alert" id="alertContrasena">{{passwordMessage}}</span>
                 </div>
+
+                <div class="input-usuario">
+                    <label class="login-label" for="inputRol">Rol</label>
+                    <select class="login-input" name="inputRol" id="inputRol" formControlName="rol">
+                        <option value="user">Usuario</option>
+                        <option value="admin">Administrador</option>
+                    </select>          
+                </div>
+
                 <button class="login-button" type="submit">
                     <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
                 </button>

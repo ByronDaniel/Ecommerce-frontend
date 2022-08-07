@@ -7,11 +7,18 @@ import { Product } from 'src/app/models/Product';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  @Input() productsIn : Product[] = [];
-  @Input() productTypeSelectedIn : string = "";
+
   constructor() { }
 
   ngOnInit(): void {
   }
+  products : Product[] = [];
+  productTypeSelected: string = "";
 
+  productsOut(products : Product[]){
+    this.products = products;
+  }
+  productTypeSelectedOut(name: string){
+    this.productTypeSelected = name;
+  }
 }
