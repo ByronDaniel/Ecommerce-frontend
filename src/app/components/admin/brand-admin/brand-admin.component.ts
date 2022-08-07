@@ -11,7 +11,7 @@ import { EcommerceService } from 'src/app/services/ecommerce.service';
 })
 export class BrandAdminComponent implements OnInit {
   brands: Brand[] = [];
-  constructor(private httpService: EcommerceService) { }
+  constructor(private ecommerceService: EcommerceService) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -24,7 +24,7 @@ export class BrandAdminComponent implements OnInit {
     // .set('order','Asc')
     .set('offset','0');
 
-    this.httpService.get('Brand',params).subscribe(brands => {
+    this.ecommerceService.get('Brand',params).subscribe(brands => {
       this.brands = brands as Brand[];
     },error=>{
       console.log('etnro',error);

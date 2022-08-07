@@ -8,11 +8,12 @@ import {
 import { catchError, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { LoaderService } from '../services/loader.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router : Router) {}
+  constructor(private router : Router, private loaderService: LoaderService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -25,6 +26,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 icon: 'warning',
                 title: `Error en la conexión al servidor`,
                 text: `Status: ${error.status}`,
+                showConfirmButton: false,
+                timer: 1500
               });
               break;
             case 400:
@@ -33,6 +36,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 icon: 'warning',
                 title: `Validar la estructura de la petición`,
                 text: `Status: ${error.status}`,
+                showConfirmButton: false,
+                timer: 1500
               });
               break;
             case 401:
@@ -41,6 +46,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 icon: 'warning',
                 title: `Error de autenticación`,
                 text: `Status: ${error.status}`,
+                showConfirmButton: false,
+                timer: 1500
               });
               this.router.navigate(['/login']);
               break;
@@ -54,8 +61,11 @@ export class ErrorInterceptor implements HttpInterceptor {
             icon: 'warning',
             title: `${error.error.title}`,
             text: `${error.error.detail}`,
+            showConfirmButton: false,
+            timer: 1500
           });  
         }
+        this.loaderService.loaderState(false);
         throw error;
       }
       )

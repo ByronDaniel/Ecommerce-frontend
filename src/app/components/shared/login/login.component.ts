@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
     console.log(this.formGroupLogin)
     if(this.formGroupLogin.valid){
       this.login(this.formGroupLogin.getRawValue());
-    }else{
     }
   }
 }

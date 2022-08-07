@@ -19,7 +19,7 @@ export class MyCartComponent implements OnInit {
   order!: OrderDto;
   deliveryMethod: string = "";
   deliveryMethods: DeliveryMethod[] = [];
-  constructor(private httpService: EcommerceService, private router: Router, private route: ActivatedRoute) { 
+  constructor(private ecommerceService: EcommerceService, private router: Router, private route: ActivatedRoute) { 
 
   }
 
@@ -30,7 +30,7 @@ export class MyCartComponent implements OnInit {
   }
   
   getDeliveryMethods(){
-    this.httpService.get('DeliveryMethod?sort=Name&order=Asc&offset=0').subscribe(
+    this.ecommerceService.get('DeliveryMethod?sort=Name&order=Asc&offset=0').subscribe(
       response=>{
         this.deliveryMethods = response as DeliveryMethod[];
       }
@@ -38,7 +38,7 @@ export class MyCartComponent implements OnInit {
   }
   getOrder(){
     if(this.orderId != null || this.orderId != undefined){
-      this.httpService.get(`Order/Show/${this.orderId}`).subscribe(response=>{
+      this.ecommerceService.get(`Order/Show/${this.orderId}`).subscribe(response=>{
         this.order = response as OrderDto;
         if(this.order.orderProducts.length == 0){
           Swal.fire({
@@ -81,7 +81,7 @@ export class MyCartComponent implements OnInit {
       cancelButtonText: 'No, regresar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.httpService.put(`Order/Cancel/${this.orderId}`).subscribe(response=>{
+        this.ecommerceService.put(`Order/Cancel/${this.orderId}`).subscribe(response=>{
           localStorage.removeItem('orderId');
           Swal.fire({
             position: 'center',
@@ -109,7 +109,7 @@ export class MyCartComponent implements OnInit {
       cancelButtonText: 'Regresar',
     }).then((result) => {
       if (result.isConfirmed) {  
-        this.httpService.put(`Order/Pay/${this.orderId}/DeliveryMethod/${this.deliveryMethod}`).subscribe(response=>{
+        this.ecommerceService.put(`Order/Pay/${this.orderId}/DeliveryMethod/${this.deliveryMethod}`).subscribe(response=>{
       localStorage.removeItem('orderId');
       Swal.fire({
         position: 'center',
@@ -135,7 +135,7 @@ export class MyCartComponent implements OnInit {
 
   removeProduct(product: OrderProduct){
     let orderId = localStorage.getItem('orderId');
-    this.httpService.delete(`Order/${orderId}/Product/${product.productId}`).subscribe(
+    this.ecommerceService.delete(`Order/${orderId}/Product/${product.productId}`).subscribe(
       response =>{
         this.getOrder();
       }
@@ -148,7 +148,7 @@ export class MyCartComponent implements OnInit {
       productId: product.productId,
       productQuantity : parseInt(quantity)
     }
-    this.httpService.put(`Order/${orderId}/Product`,OrderProductQuantity).subscribe(response=>{
+    this.ecommerceService.put(`Order/${orderId}/Product`,OrderProductQuantity).subscribe(response=>{
       this.getOrder();
     })
   }

@@ -18,12 +18,12 @@ export class ProductInfoComponent implements OnInit {
     productId: "",
     productQuantity: 1
   };
-  constructor(private route: ActivatedRoute, private router: Router, private httpService: EcommerceService, private location: Location) { }
+  constructor(private route: ActivatedRoute, private router: Router, private ecommerceService: EcommerceService, private location: Location) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(param =>{
       let id = param['id'];
-      this.httpService.get(`Product/${id}`).subscribe(
+      this.ecommerceService.get(`Product/${id}`).subscribe(
         response =>{
           this.productSelected = response as Product;
           this.getStock(this.productSelected.stock);
@@ -45,12 +45,12 @@ export class ProductInfoComponent implements OnInit {
     let orderId = localStorage.getItem('orderId'); 
 
     if(orderId == null){
-      this.httpService.post('Order').subscribe(response=>{
+      this.ecommerceService.post('Order').subscribe(response=>{
         let responseOrder = response as Order;
         let orderNew = responseOrder.id;
         localStorage.setItem('orderId', orderNew);
         
-        this.httpService.post(`Order/${orderNew}/Product`,this.addProduct).subscribe(response=>{
+        this.ecommerceService.post(`Order/${orderNew}/Product`,this.addProduct).subscribe(response=>{
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -61,7 +61,7 @@ export class ProductInfoComponent implements OnInit {
         });
       });
     }else{
-      this.httpService.post(`Order/${orderId}/Product`,this.addProduct).subscribe(response=>{
+      this.ecommerceService.post(`Order/${orderId}/Product`,this.addProduct).subscribe(response=>{
         Swal.fire({
           position: 'center',
           icon: 'success',

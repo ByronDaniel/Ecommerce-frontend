@@ -6,7 +6,7 @@ import { Brand } from 'src/app/models/Brand';
 import { Product } from 'src/app/models/Product';
 import { ProductType } from 'src/app/models/ProductType';
 import { EcommerceService } from 'src/app/services/ecommerce.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
@@ -19,7 +19,7 @@ export class ProductFormComponent implements OnInit {
   brands : Brand [] = [];
   productId!: string;
   @Output() productNewOut = new EventEmitter();
-  constructor(private httpService : EcommerceService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) { 
+  constructor(private ecommerceService : EcommerceService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) { 
   }
 
   ngOnInit(): void {
@@ -29,23 +29,31 @@ export class ProductFormComponent implements OnInit {
   }
 
   getProductTypes(){
-    this.httpService.get('ProductType?sort=Name&order=Asc&offset=0').subscribe(response =>{
+    this.ecommerceService.get('ProductType?sort=Name&order=Asc&offset=0').subscribe(response =>{
       this.productTypes = response as ProductType[];
     });
   }
   
   getBrands(){
-    this.httpService.get('Brand?sort=Name&order=Asc&offset=0').subscribe(response =>{
+    this.ecommerceService.get('Brand?sort=Name&order=Asc&offset=0').subscribe(response =>{
       this.brands = response as Brand[];
     })
   }
 
   addProduct(product: Product){
-    this.httpService.post('Product',this.formGroupProduct.getRawValue()).subscribe(response =>{
-      this.httpService.get(`Brand/${product.brandId}`).subscribe((response)=>{
+    this.ecommerceService.post('Product',this.formGroupProduct.getRawValue()).subscribe(response =>{
+      this.ecommerceService.get(`Brand/${product.brandId}`).subscribe((response)=>{
         let brand = response as Brand;
         product.brand = brand.name;
       })
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: `Producto Agregado con Éxito!`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.router.navigate(['/admin/products']);
       this.productNewOut.emit(product);
     });
   }
@@ -103,10 +111,9 @@ export class ProductFormComponent implements OnInit {
   }
 
   getProduct(id: string){
-    this.httpService.get(`Product/${id}`).subscribe(
+    this.ecommerceService.get(`Product/${id}`).subscribe(
       response =>{
         this.product = response as Product;
-        debugger;
         this.formGroupProduct = this.formBuilder.group({
           id: [this.product.id,[Validators.required]],
           name: [this.product.name,[Validators.required]],
@@ -122,9 +129,16 @@ export class ProductFormComponent implements OnInit {
   }
 
   updateProduct(){
-    this.httpService.put(`Product`,this.formGroupProduct.getRawValue()).subscribe(
+    this.ecommerceService.put(`Product`,this.formGroupProduct.getRawValue()).subscribe(
       response=>{
-        console.log(response);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `Producto Actualizado con Éxito!`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.router.navigate(['/admin/products']);
       }
     );
   }

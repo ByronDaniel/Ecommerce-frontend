@@ -4,6 +4,10 @@
     border-radius: 5px;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.714);
     padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .product-form > input,textarea, select,button{
     display: block;
@@ -21,6 +25,8 @@
 .label{
     display: flex;
     align-items: center;
+    font-weight: bold;
+    margin-top: 20px;
 }
 .fa-circle-check{
     color: green;
@@ -30,4 +36,16 @@
 .hidden{
     display: none;
     visibility: none;
+}
+.btn-guardar{
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.btn-guardar:hover{
+    background-color: #143175;
+    cursor: pointer;
 }

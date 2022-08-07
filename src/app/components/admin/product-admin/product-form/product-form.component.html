@@ -34,7 +34,7 @@
 
   <label for="productTypeId" class="label">Tipo de producto <i *ngIf="productTypeIdField!.valid" class="fa-solid fa-circle-check"></i></label>
   <select id="productTypeId" formControlName="productTypeId">
-    <option value="" [defaultSelected]="true">Seleccione</option>
+    <option value="" [defaultSelected]="true">SELECCIONE</option>
     <option
       *ngFor="let productType of productTypes"
       value="{{ productType.id }}"
@@ -46,12 +46,12 @@
 
   <label for="brandId" class="label">Marca <i *ngIf="brandIdField!.valid" class="fa-solid fa-circle-check"></i></label>
   <select formControlName="brandId">
-    <option value="" [defaultSelected]="true">Seleccione</option>
+    <option value="" [defaultSelected]="true">SELECCIONE</option>
     <option *ngFor="let brand of brands" value="{{ brand.id }}">
       {{ brand.name }}
     </option>
   </select>
   <span class="validation" *ngIf="brandIdField!.invalid && (brandIdField!.touched || formProduct.submitted)">Requerido</span>
 
-  <button type="submit">Agregar</button>
+  <button class="btn-guardar" type="submit">Agregar</button>
 </form>

@@ -24,6 +24,7 @@ import { AuthService } from './auth/auth.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { LoadingComponent } from './components/shared/loading/loading.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     ProductAdminComponent,
     BrandAdminComponent,
     BrandListComponent,
-    BrandFormComponent
+    BrandFormComponent,
+    LoadingComponent
     ],
   imports: [
     BrowserModule,
@@ -51,10 +53,10 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
   ],
   providers: [
     AuthService,
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService,
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
-    {provide:HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true}
+    {provide:HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true},
+    JwtHelperService,
   ],
   bootstrap: [AppComponent]
 })
