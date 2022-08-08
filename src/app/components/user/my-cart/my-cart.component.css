@@ -9,6 +9,8 @@
 }
 .cart-products{
     width: 40%;
+    overflow-y: visible;
+    height: 90vh;
 }
 .order-product{
     background-color: white;
@@ -112,4 +114,25 @@
     text-decoration: none;
     color: var(--primary-color);
     font-size: 0.9rem;
+    border: none;
+    font-weight: bold;
 }
+
+.available,.unavailable {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 0.7rem;
+    z-index: 10;
+}
+
+.available {
+    color: white;
+    background-color: rgb(1, 150, 1);
+}
+.unavailable{
+    background-color: red;
+    color: white;
+}
+

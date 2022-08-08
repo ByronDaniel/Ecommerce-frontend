@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/models/Product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EcommerceService } from 'src/app/services/ecommerce.service';
@@ -6,31 +6,36 @@ import { Order } from 'src/app/models/Order';
 import { OrderProductDto } from 'src/app/models/OrderProductDto';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
+
+
 @Component({
   selector: 'app-product-info',
   templateUrl: './product-info.component.html',
   styleUrls: ['./product-info.component.css']
 })
 export class ProductInfoComponent implements OnInit {
-  productSelected!: Product;
+  @Input() productSelected!: Product;
+  @Output() closeModal = new EventEmitter();
   stock: number [] = [];
   addProduct : OrderProductDto = {
     productId: "",
     productQuantity: 1
   };
+
+   
   constructor(private route: ActivatedRoute, private router: Router, private ecommerceService: EcommerceService, private location: Location) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(param =>{
-      let id = param['id'];
-      this.ecommerceService.get(`Product/${id}`).subscribe(
-        response =>{
-          this.productSelected = response as Product;
-          this.getStock(this.productSelected.stock);
-        }
-      )
-    });
-    console.log('fuera del oninit',this.productSelected);
+    this.getProductInfo(this.productSelected.id!);
+  }
+
+  getProductInfo(id:string){
+    this.ecommerceService.get(`Product/${id}`).subscribe(
+      response =>{
+        this.productSelected = response as Product;
+        this.getStock(this.productSelected.stock);
+      }
+    )
   }
 
   getStock(stock :number) : void{
@@ -59,6 +64,7 @@ export class ProductInfoComponent implements OnInit {
             timer: 1000
           });
         });
+        this.closeModal.emit(true);
       });
     }else{
       this.ecommerceService.post(`Order/${orderId}/Product`,this.addProduct).subscribe(response=>{
@@ -69,8 +75,8 @@ export class ProductInfoComponent implements OnInit {
           showConfirmButton: false,
           timer: 1000
         });
+        this.closeModal.emit(true);
       });
     }
-    this.location.back();
   }
 }

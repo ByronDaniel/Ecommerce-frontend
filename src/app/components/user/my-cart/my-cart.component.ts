@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeliveryMethod } from 'src/app/models/DeliveryMethod';
 import { OrderDto } from 'src/app/models/OrderDto';
@@ -7,6 +7,7 @@ import { OrderProduct } from 'src/app/models/OrderProduct';
 import { OrderProductQuantity } from 'src/app/models/OrderProductQuantity';
 import { EcommerceService } from 'src/app/services/ecommerce.service';
 import Swal from 'sweetalert2'
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-my-cart',
@@ -19,7 +20,10 @@ export class MyCartComponent implements OnInit {
   order!: OrderDto;
   deliveryMethod: string = "";
   deliveryMethods: DeliveryMethod[] = [];
-  constructor(private ecommerceService: EcommerceService, private router: Router, private route: ActivatedRoute) { 
+  productSelected!: Product;
+  modalRef?: BsModalRef;
+
+  constructor(private modalService: BsModalService, private ecommerceService: EcommerceService, private router: Router, private route: ActivatedRoute) { 
 
   }
 
@@ -29,6 +33,18 @@ export class MyCartComponent implements OnInit {
     this.getDeliveryMethods();
   }
   
+  openModal(template: TemplateRef<any>, product: string) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));
+    this.ecommerceService.get(`Product/${product}`).subscribe(response=>{
+      this.productSelected =response as Product;
+    })
+  }
+
+  closeModal(){
+    this.modalRef?.hide();
+    this.getOrder();
+  }
+
   getDeliveryMethods(){
     this.ecommerceService.get('DeliveryMethod?sort=Name&order=Asc&offset=0').subscribe(
       response=>{
@@ -36,6 +52,7 @@ export class MyCartComponent implements OnInit {
       }
     )
   }
+
   getOrder(){
     if(this.orderId != null || this.orderId != undefined){
       this.ecommerceService.get(`Order/Show/${this.orderId}`).subscribe(response=>{

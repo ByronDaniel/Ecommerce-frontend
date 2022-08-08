@@ -25,7 +25,7 @@ export class ProductTypesComponent implements OnInit {
 
   getProductTypes(){
     this.loaderService.loaderState();
-    this.ecommerceService.get('ProductType?sort=Name&order=Asc&limit=5&offset=0').subscribe((response)=>{
+    this.ecommerceService.get('ProductType?sort=Name&order=Asc&limit=0&offset=0').subscribe((response)=>{
       this.productTypes = response as ProductType[];
       this.getProducts(this.productTypes[0]);
       this.loaderService.loaderState(false);
@@ -34,7 +34,7 @@ export class ProductTypesComponent implements OnInit {
   
   getProducts(productType: ProductType){
     this.loaderService.loaderState();
-    this.ecommerceService.get(`Product?search=${productType.id}&sort=Name&order=Asc&limit=3&offset=0`).subscribe((response)=>{
+    this.ecommerceService.get(`Product?search=${productType.id}&sort=Name&order=Asc&limit=0&offset=0`).subscribe((response)=>{
       this.products = response as Product[];
       this.productTypeSelected = productType.name;
       this.productTypeSelectedOut.emit(productType.name);
@@ -45,7 +45,7 @@ export class ProductTypesComponent implements OnInit {
   
   searchProducts(){
     if(this.searchProduct != ""){
-      this.ecommerceService.get(`Product?search=${this.searchProduct}&sort=Name&order=Asc&limit=5&offset=0`).subscribe((response)=>{
+      this.ecommerceService.get(`Product?search=${this.searchProduct}&sort=Name&order=Asc&limit=0&offset=0`).subscribe((response)=>{
         this.products = response as Product[];
         this.productTypeSelected = `Busqueda: ${this.searchProduct}`;
         this.productTypeSelectedOut.emit(this.productTypeSelected);

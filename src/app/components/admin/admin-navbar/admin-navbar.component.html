@@ -1,0 +1,16 @@
+<nav class="navbar-menu">
+    <ul class="menu-items">
+        <li class="menu-item">
+            <a routerLink="/admin/products" class="menu-link" [class.item-selected]="this.currentRoute.includes('/admin/products')">Productos</a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" routerLink="/admin/brands" [class.item-selected]="this.currentRoute.includes('/admin/brands')">Marcas</a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link">Categorias</a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link">Metodos de entrega</a>
+        </li>
+    </ul>
+</nav>

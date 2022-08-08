@@ -6,16 +6,17 @@
         <div class="order-product" *ngFor="let product of order.orderProducts">
             <img class="order-img" src="{{product.imageUrl}}">
             <div class="order-detail">
-                <h3 class="cart-title">{{product.product}}</h3>
-                <a class="btn-show-product" [routerLink]="['/product',product.productId]">Ver Información...</a>
-                <p><b>Precio:</b> ${{product.price}}</p>
+                <h5 class="cart-title">{{product.product}}</h5>
                 <hr>
-                <span>Total <b>
+                <b> Cantidad:
                     <select class="input-quantity" name="quantity" (change)="updateQuantity(product,quantitySelected.value)" #quantitySelected>
                         <option *ngFor="let quantity of product.stockArray" value="{{quantity}}" [defaultSelected]="product.productQuantity == quantity">{{quantity}}</option>
                     </select>                
-                </b> unidades: </span> ${{product.total}}
+                </b>
+                <p><b>Precio:</b> ${{product.total}}</p>
+                <button class="btn-show-product" (click)="openModal(template, product.productId)">Ver Detalles</button>
                 <div>
+                    <br>
                     <button class="btn-remove-product" (click)="removeProduct(product)">Remover Producto</button>
                 </div>
             </div>
@@ -60,3 +61,17 @@
 <ng-template #noProducts>
     <h3>No hay productos agregados aun</h3>
 </ng-template>
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{productSelected.name}}</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <span [class.available]="productSelected.stock>0" [class.unavailable]="productSelected.stock==0">{{productSelected.stock>0 ? 'Disponible': 'Agotado'}}</span>
+      <app-product-info [productSelected] = "productSelected" (closeModal)="closeModal()"></app-product-info>
+    </div>
+    </ng-template>
+    

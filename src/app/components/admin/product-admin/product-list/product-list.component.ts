@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit {
   
   getProducts(){
     this.loaderService.loaderState();
-    this.ecommerceService.get('Product?limit=3&offset=0&sort=Name&order=asc').subscribe(response=>{
+    this.ecommerceService.get('Product?limit=0&offset=0&sort=Name&order=asc').subscribe(response=>{
       this.products = response as Product [];
       this.loaderService.loaderState(false);
     });

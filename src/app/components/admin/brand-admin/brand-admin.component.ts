@@ -19,7 +19,7 @@ export class BrandAdminComponent implements OnInit {
 
   getBrands(){
     let params = new HttpParams()
-    .set('limit','5')
+    .set('limit','0')
     // .set('sort','Name')
     // .set('order','Asc')
     .set('offset','0');
