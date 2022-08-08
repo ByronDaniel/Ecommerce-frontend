@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
   
   onSubmit(event: Event){
     event.preventDefault();
-    console.log(this.formGroupLogin)
     if(this.formGroupLogin.valid){
       this.login(this.formGroupLogin.getRawValue(),this.formGroupLogin.get("rol")?.value);
     }

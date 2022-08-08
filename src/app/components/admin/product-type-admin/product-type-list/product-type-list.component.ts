@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { Brand } from 'src/app/models/Brand';
+import { ProductType } from 'src/app/models/ProductType';
 import { EcommerceService } from 'src/app/services/ecommerce.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-brand-list',
-  templateUrl: './brand-list.component.html',
-  styleUrls: ['./brand-list.component.css']
+  selector: 'app-product-type-list',
+  templateUrl: './product-type-list.component.html',
+  styleUrls: ['./product-type-list.component.css']
 })
-export class BrandListComponent implements OnInit {
-  brands: Brand[] = [];
+export class ProductTypeListComponent implements OnInit {
+  productTypes: ProductType[] = [];
   constructor(private ecommerceService: EcommerceService, private loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    this.getBrands();
+    this.getProductTypes();
   }
   
-  getBrands(){
+  getProductTypes(){
     this.loaderService.loaderState();
-    this.ecommerceService.get('Brand?limit=0&offset=0&sort=Name&order=asc').subscribe(response=>{
-      this.brands = response as Brand [];
+    this.ecommerceService.get('ProductType?limit=0&offset=0&sort=Name&order=asc').subscribe(response=>{
+      this.productTypes = response as ProductType [];
       this.loaderService.loaderState(false);
     });
   }
 
-  deleteBrand(brandId: string){
+  deleteProductType(productTypeId: string){
     this.loaderService.loaderState();
     const swalWithBootstrapButtons = Swal.mixin({
       buttonsStyling: true
@@ -32,20 +32,20 @@ export class BrandListComponent implements OnInit {
     
     swalWithBootstrapButtons.fire({
       title: 'Eliminar',
-      text: "Estás Seguro de eliminar la marca?",
+      text: "Estás Seguro de eliminar la categoria?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar!',
       cancelButtonText: 'No, cancelar!',
       reverseButtons: true
     }).then((result) => {
-      this.ecommerceService.delete(`Brand/${brandId}`).subscribe(response => {
-        this.brands = this.brands.filter(brand => brand.id != brandId);
+      this.ecommerceService.delete(`ProductType/${productTypeId}`).subscribe(response => {
+        this.productTypes = this.productTypes.filter(productType => productType.id != productTypeId);
         this.loaderService.loaderState(false);
         if (result.isConfirmed) {
           swalWithBootstrapButtons.fire(
             'Eliminado!',
-            'Marca Eliminada con Exíto',
+            'Categoria Eliminada con Exíto',
             'success'
           )
         }
@@ -53,7 +53,7 @@ export class BrandListComponent implements OnInit {
     })
   }
 
-  brandNewOut(brand: Brand){
-    this.brands.push(brand);
+  productTypeNewOut(productType: ProductType){
+    this.productTypes.push(productType);
   }
 }

@@ -52,15 +52,19 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.router.navigate(['/login']);
               break;
             case 404:
-              console.log('not found')
+              alert('No existe la página');
               break;              
           }
         }else{
+          let errores="";
+          for (const property in error.error.errors) {
+            errores +=`${property}: ${error.error.errors[property]}. \n`;
+          }
           Swal.fire({
             position: 'center',
             icon: 'warning',
             title: `${error.error.title}`,
-            text: `${error.error.detail}`,
+            text: `${errores}`,
             showConfirmButton: false,
             timer: 1500
           });  

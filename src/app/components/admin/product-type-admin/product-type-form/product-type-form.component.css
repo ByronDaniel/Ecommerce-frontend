@@ -1,4 +1,4 @@
-.brand-form{
+.product-type-form{
     background-color: white;
     width: 25%;
     border-radius: 5px;
@@ -9,7 +9,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.brand-form > input,textarea, select,button{
+.product-type-form > input,textarea, select,button{
     display: block;
     width: 100%;
     margin-bottom: 5px;

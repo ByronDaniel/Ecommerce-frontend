@@ -27,6 +27,12 @@ import { ProductInfoComponent } from './components/user/product-info/product-inf
 import { ProductTypesComponent } from './components/user/products/product-types/product-types.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AdminNavbarComponent } from './components/admin/admin-navbar/admin-navbar.component';
+import { DeliveryMethodAdminComponent } from './components/admin/delivery-method-admin/delivery-method-admin.component';
+import { DeliveryMethodFormComponent } from './components/admin/delivery-method-admin/delivery-method-form/delivery-method-form.component';
+import { DeliveryMethodListComponent } from './components/admin/delivery-method-admin/delivery-method-list/delivery-method-list.component';
+import { ProductTypeAdminComponent } from './components/admin/product-type-admin/product-type-admin.component';
+import { ProductTypeFormComponent } from './components/admin/product-type-admin/product-type-form/product-type-form.component';
+import { ProductTypeListComponent } from './components/admin/product-type-admin/product-type-list/product-type-list.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +52,16 @@ import { AdminNavbarComponent } from './components/admin/admin-navbar/admin-navb
     BrandListComponent,
     BrandFormComponent,
     LoadingComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    BrandAdminComponent,
+    BrandFormComponent,
+    BrandListComponent,
+    DeliveryMethodAdminComponent,
+    DeliveryMethodFormComponent,
+    DeliveryMethodListComponent,
+    ProductTypeAdminComponent,
+    ProductTypeFormComponent,
+    ProductTypeListComponent
     ],
   imports: [
     BrowserModule,

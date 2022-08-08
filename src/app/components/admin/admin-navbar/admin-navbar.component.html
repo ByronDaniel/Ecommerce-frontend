@@ -6,11 +6,11 @@
         <li class="menu-item">
             <a class="menu-link" routerLink="/admin/brands" [class.item-selected]="this.currentRoute.includes('/admin/brands')">Marcas</a>
         </li>
-        <li class="menu-item">
-            <a class="menu-link">Categorias</a>
+        <li class="menu-item" routerLink="/admin/product-types">
+            <a class="menu-link" [class.item-selected]="this.currentRoute.includes('/admin/product-types')">Categorias</a>
         </li>
-        <li class="menu-item">
-            <a class="menu-link">Metodos de entrega</a>
+        <li class="menu-item" routerLink="/admin/delivery-methods">
+            <a class="menu-link" [class.item-selected]="this.currentRoute.includes('/admin/delivery-methods')">Metodos de entrega</a>
         </li>
     </ul>
 

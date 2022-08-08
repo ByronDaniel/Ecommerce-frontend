@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { LoaderService } from './services/loader.service';
 
 @Component({
@@ -6,9 +6,11 @@ import { LoaderService } from './services/loader.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Ecommerce';
-  constructor(public loaderService: LoaderService){
-
+export class AppComponent implements AfterViewChecked{
+  constructor(public loaderService: LoaderService, private changeDetector : ChangeDetectorRef){
   }
+  ngAfterViewChecked(){
+    this.changeDetector.detectChanges();
+  }
+  
 }
