@@ -1,5 +1,4 @@
-export interface ProductType
-{
-    id: string,
-    name: string
+export interface ProductType {
+  id: string;
+  name: string;
 }

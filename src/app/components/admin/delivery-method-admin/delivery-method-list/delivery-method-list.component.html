@@ -1,18 +1,30 @@
-<h3 class="title">MÉTODOS DE ENTREGA</h3> 
+<h3 class="title">MÉTODOS DE ENTREGA</h3>
 
-<!-- <app-delivery-method-form (deliveryMethodNewOut)="deliveryMethodNewOut($event)"></app-delivery-method-form> -->
 <table class="table-deliveryMethods">
-    <thead class="thead">
-        <td>MÉTODOS DE ENTREGA</td>
-        <td><a class="button-table" routerLink="/admin/delivery-methods/create">Nuevo <i class="fa-solid fa-plus"></i></a></td>
-    </thead>
-    <tbody *ngIf="deliveryMethods.length > 0">
-        <tr *ngFor="let deliveryMethod of deliveryMethods">
-            <td>{{deliveryMethod.name}}</td>
-            <td class="buttons-flex">
-                <a class="button-table" [routerLink]="['/admin/delivery-methods/edit/',deliveryMethod.id]">Editar <i class="fa-solid fa-pen"></i></a>
-                <button class="button-table" (click)="deleteDeliveryMethod(deliveryMethod.id!)">Eliminar <i class="fa-solid fa-trash"></i></button>
-            </td>
-        </tr>
-    </tbody>
+  <thead class="thead">
+    <td>MÉTODOS DE ENTREGA</td>
+    <td>
+      <a class="button-table" routerLink="/admin/delivery-methods/create"
+        >Nuevo <i class="fa-solid fa-plus"></i
+      ></a>
+    </td>
+  </thead>
+  <tbody *ngIf="deliveryMethods.length > 0">
+    <tr *ngFor="let deliveryMethod of deliveryMethods">
+      <td>{{ deliveryMethod.name }}</td>
+      <td class="buttons-flex">
+        <a
+          class="button-table"
+          [routerLink]="['/admin/delivery-methods/edit/', deliveryMethod.id]"
+          >Editar <i class="fa-solid fa-pen"></i
+        ></a>
+        <button
+          class="button-table"
+          (click)="deleteDeliveryMethod(deliveryMethod.id!)"
+        >
+          Eliminar <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>

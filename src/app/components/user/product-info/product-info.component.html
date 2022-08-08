@@ -1,18 +1,27 @@
-<div *ngIf="productSelected != null else cargando">
-    <img class="product-img" src="{{productSelected.imageUrl}}" style="width:400px">
-    <div class="product-details">
-        <h5>Descripcion: </h5>
-        <p>{{productSelected.description}}</p>
-        <h5 class="span-product">Precio: $ {{productSelected.price}}</h5>
-    </div>
-    <div class="add-cart" *ngIf="productSelected.stock > 0">
-        <select class="input-quantity" name="quantity" #quantity>
-            <option *ngFor="let i of stock" value="{{i}}">{{i}}</option>
-        </select>
-        <button class="btn-add-cart" (click)="addProductCart(productSelected.id!, quantity.value)"><i class="fa-solid fa-cart-plus"></i> Agregar a mi carrito</button>
-    </div>
+<div *ngIf="productSelected != null; else cargando">
+  <img
+    class="product-img"
+    src="{{ productSelected.imageUrl }}"
+    style="width: 400px"
+  />
+  <div class="product-details">
+    <h5>Descripcion:</h5>
+    <p>{{ productSelected.description }}</p>
+    <h5 class="span-product">Precio: $ {{ productSelected.price }}</h5>
+  </div>
+  <div class="add-cart" *ngIf="productSelected.stock > 0">
+    <select class="input-quantity" name="quantity" #quantity>
+      <option *ngFor="let i of stock" value="{{ i }}">{{ i }}</option>
+    </select>
+    <button
+      class="btn-add-cart"
+      (click)="addProductCart(productSelected.id!, quantity.value)"
+    >
+      <i class="fa-solid fa-cart-plus"></i> Agregar a mi carrito
+    </button>
+  </div>
 </div>
 
 <ng-template #cargando>
-    <span class="no-products">obteniendo producto</span>
+  <span class="no-products">obteniendo producto</span>
 </ng-template>

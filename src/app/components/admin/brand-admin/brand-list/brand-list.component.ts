@@ -6,54 +6,63 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-brand-list',
   templateUrl: './brand-list.component.html',
-  styleUrls: ['./brand-list.component.css']
+  styleUrls: ['./brand-list.component.css'],
 })
 export class BrandListComponent implements OnInit {
   brands: Brand[] = [];
-  constructor(private ecommerceService: EcommerceService, private loaderService: LoaderService) { }
+  constructor(
+    private ecommerceService: EcommerceService,
+    private loaderService: LoaderService
+  ) {}
 
   ngOnInit(): void {
     this.getBrands();
   }
-  
-  getBrands(){
+
+  getBrands() {
     this.loaderService.loaderState();
-    this.ecommerceService.get('Brand?limit=0&offset=0&sort=Name&order=asc').subscribe(response=>{
-      this.brands = response as Brand [];
-      this.loaderService.loaderState(false);
-    });
+    this.ecommerceService
+      .get('Brand?limit=0&offset=0&sort=Name&order=asc')
+      .subscribe((response) => {
+        this.brands = response as Brand[];
+        this.loaderService.loaderState(false);
+      });
   }
 
-  deleteBrand(brandId: string){
+  deleteBrand(brandId: string) {
     this.loaderService.loaderState();
     const swalWithBootstrapButtons = Swal.mixin({
-      buttonsStyling: true
-    })
-    
-    swalWithBootstrapButtons.fire({
-      title: 'Eliminar',
-      text: "Estás Seguro de eliminar la marca?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si, eliminar!',
-      cancelButtonText: 'No, cancelar!',
-      reverseButtons: true
-    }).then((result) => {
-      this.ecommerceService.delete(`Brand/${brandId}`).subscribe(response => {
-        this.brands = this.brands.filter(brand => brand.id != brandId);
-        this.loaderService.loaderState(false);
-        if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire(
-            'Eliminado!',
-            'Marca Eliminada con Exíto',
-            'success'
-          )
-        }
+      buttonsStyling: true,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Eliminar',
+        text: 'Estás Seguro de eliminar la marca?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, eliminar!',
+        cancelButtonText: 'No, cancelar!',
+        reverseButtons: true,
       })
-    })
+      .then((result) => {
+        this.ecommerceService
+          .delete(`Brand/${brandId}`)
+          .subscribe((response) => {
+            this.brands = this.brands.filter((brand) => brand.id != brandId);
+            this.loaderService.loaderState(false);
+            if (result.isConfirmed) {
+              swalWithBootstrapButtons.fire(
+                'Eliminado!',
+                'Marca Eliminada con Exíto',
+                'success'
+              );
+            }
+          });
+      });
   }
 
-  brandNewOut(brand: Brand){
+  brandNewOut(brand: Brand) {
     this.brands.push(brand);
   }
 }

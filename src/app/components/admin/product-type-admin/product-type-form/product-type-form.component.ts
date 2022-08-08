@@ -24,19 +24,12 @@ export class ProductTypeFormComponent implements OnInit {
   ngOnInit(): void {
     this.buildformGroupProductType();
     this.getProductTypes();
-    this.getBrands();
   }
 
   getProductTypes(){
     this.ecommerceService.get('ProductType?sort=Name&order=Asc&offset=0').subscribe(response =>{
       this.productTypes = response as ProductType[];
     });
-  }
-  
-  getBrands(){
-    this.ecommerceService.get('Brand?sort=Name&order=Asc&offset=0').subscribe(response =>{
-      this.brands = response as Brand[];
-    })
   }
 
   addProductType(productType: ProductType){

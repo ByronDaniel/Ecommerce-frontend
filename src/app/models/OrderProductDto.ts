@@ -1,4 +1,4 @@
-export interface OrderProductDto{
-    productId:string,
-    productQuantity: number
+export interface OrderProductDto {
+  productId: string;
+  productQuantity: number;
 }

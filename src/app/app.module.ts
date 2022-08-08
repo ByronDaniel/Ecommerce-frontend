@@ -61,23 +61,23 @@ import { ProductTypeListComponent } from './components/admin/product-type-admin/
     DeliveryMethodListComponent,
     ProductTypeAdminComponent,
     ProductTypeFormComponent,
-    ProductTypeListComponent
-    ],
+    ProductTypeListComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
   providers: [
     AuthService,
-    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
-    {provide:HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true},
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     JwtHelperService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

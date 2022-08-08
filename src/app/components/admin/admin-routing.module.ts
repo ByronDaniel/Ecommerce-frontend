@@ -13,28 +13,38 @@ import { ProductTypeAdminComponent } from './product-type-admin/product-type-adm
 import { ProductTypeFormComponent } from './product-type-admin/product-type-form/product-type-form.component';
 
 const routes: Routes = [
-  { path: '', component: AdminComponent, children:[
-    { path: 'products', component: ProductAdminComponent},
-    { path: 'product/:id', component: ProductInfoComponent },
-    { path: 'products/edit/:id', component: ProductFormComponent},
-    { path: 'products/create', component: ProductFormComponent},
+  {
+    path: '',
+    component: AdminComponent,
+    children: [
+      { path: 'products', component: ProductAdminComponent },
+      { path: 'product/:id', component: ProductInfoComponent },
+      { path: 'products/edit/:id', component: ProductFormComponent },
+      { path: 'products/create', component: ProductFormComponent },
 
-    { path: 'brands', component: BrandAdminComponent},
-    { path: 'brands/edit/:id', component: BrandFormComponent},
-    { path: 'brands/create', component: BrandFormComponent},
+      { path: 'brands', component: BrandAdminComponent },
+      { path: 'brands/edit/:id', component: BrandFormComponent },
+      { path: 'brands/create', component: BrandFormComponent },
 
-    { path: 'product-types', component: ProductTypeAdminComponent},
-    { path: 'product-types/edit/:id', component: ProductTypeFormComponent},
-    { path: 'product-types/create', component: ProductTypeFormComponent},
+      { path: 'product-types', component: ProductTypeAdminComponent },
+      { path: 'product-types/edit/:id', component: ProductTypeFormComponent },
+      { path: 'product-types/create', component: ProductTypeFormComponent },
 
-    { path: 'delivery-methods', component: DeliveryMethodAdminComponent},
-    { path: 'delivery-methods/edit/:id', component: DeliveryMethodFormComponent},
-    { path: 'delivery-methods/create', component: DeliveryMethodFormComponent},
-  ]}
+      { path: 'delivery-methods', component: DeliveryMethodAdminComponent },
+      {
+        path: 'delivery-methods/edit/:id',
+        component: DeliveryMethodFormComponent,
+      },
+      {
+        path: 'delivery-methods/create',
+        component: DeliveryMethodFormComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

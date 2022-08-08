@@ -1,5 +1,5 @@
-export interface DeliveryMethod{
-    id: string,
-    name:string,
-    priceByKm: number
+export interface DeliveryMethod {
+  id: string;
+  name: string;
+  priceByKm: number;
 }
