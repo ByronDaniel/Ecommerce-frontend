@@ -8,6 +8,6 @@ https://github.com/ByronDaniel/EcommerceFinal
 
 ## Usuarios para iniciar sesión
 Usario / Contraseña
-Byron   123
-Maria   MiContrasena
-Evelyn  Eve123
+# Byron   123
+# Maria   MiContrasena
+# Evelyn  Eve123
