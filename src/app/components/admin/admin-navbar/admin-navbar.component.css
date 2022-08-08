@@ -1,5 +1,8 @@
 .navbar-menu{
     background-color: var(--primary-color);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 .menu-items{
     padding: 0;
@@ -26,4 +29,23 @@
     background-color: white;
     color: var(--primary-color);
     cursor: pointer;
+}
+
+
+.navbar-item{
+    list-style: none;
+    height: inherit;
+    width: max-content;
+}
+.navbar-link{
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 5px;
+}
+.navbar-link:hover{
+    background-color: white;
+    color: var(--primary-color);
 }

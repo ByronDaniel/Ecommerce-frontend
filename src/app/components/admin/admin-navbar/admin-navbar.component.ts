@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -9,7 +10,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 export class AdminNavbarComponent implements OnInit {
   currentRoute: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService : AuthService) {
     this.currentRoute = "";
     this.router.events.subscribe((event: any) => {
         if (event instanceof NavigationEnd) {
@@ -20,5 +21,7 @@ export class AdminNavbarComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  
+  logOut(){
+    this.authService.logout();
+  }
 }
