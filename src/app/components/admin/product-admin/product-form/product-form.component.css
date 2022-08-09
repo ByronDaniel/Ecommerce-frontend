@@ -57,3 +57,13 @@ button {
   background-color: #143175;
   cursor: pointer;
 }
+
+.form-flex-input{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.input-flex-c{
+  width: 100%;
+}

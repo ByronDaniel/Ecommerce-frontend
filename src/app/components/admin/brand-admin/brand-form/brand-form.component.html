@@ -8,7 +8,7 @@
   <label for="name" class="label"
     >Marca <i *ngIf="nameField!.valid" class="fa-solid fa-circle-check"></i
   ></label>
-  <input id="name" type="text" formControlName="name" placeholder="Marca" />
+  <input id="name" type="text" formControlName="name" placeholder="Marca" autofocus="autofocus" onFocus="this.select()"/>
   <span
     class="validation"
     *ngIf="nameField!.invalid && (nameField!.touched || formBrand.submitted)"

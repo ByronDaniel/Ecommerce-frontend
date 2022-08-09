@@ -3,7 +3,7 @@ import { Product } from 'src/app/models/Product';
 import { ProductType } from 'src/app/models/ProductType';
 import { EcommerceService } from 'src/app/services/ecommerce.service';
 import { LoaderService } from 'src/app/services/loader.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-product-types',
   templateUrl: './product-types.component.html',
@@ -31,7 +31,18 @@ export class ProductTypesComponent implements OnInit {
       .get('ProductType?sort=Name&order=Asc&limit=0&offset=0')
       .subscribe((response) => {
         this.productTypes = response as ProductType[];
-        this.getProducts(this.productTypes[0]);
+        if(this.productTypes.length > 0){
+          this.getProducts(this.productTypes[0]);
+        }
+        else{
+          Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: `No hay categorias disponibles`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
         this.loaderService.loaderState(false);
       });
   }

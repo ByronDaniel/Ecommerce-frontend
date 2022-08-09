@@ -4,7 +4,8 @@
     <p class="product-code"><span>Código de Orden: </span>{{ order.id }}</p>
     <hr />
     <div class="order-product" *ngFor="let product of order.orderProducts">
-      <img class="order-img" src="{{ product.imageUrl }}" />
+      <img class="order-img" src="{{ product.imageUrl }}" onerror="src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfDKQDSy8e-KJIHnylQr4ZnTNQtAA-xs986A&usqp=CAU'"
+      />
       <div class="order-detail">
         <h5 class="cart-title">{{ product.product }}</h5>
         <hr />

@@ -8,7 +8,7 @@
   <label for="name" class="label"
     >Nombre <i *ngIf="nameField!.valid" class="fa-solid fa-circle-check"></i
   ></label>
-  <input id="name" type="text" formControlName="name" placeholder="Nombre" />
+  <input id="name" type="text" formControlName="name" placeholder="Nombre" autofocus="autofocus" onFocus="this.select()"/>
   <span
     class="validation"
     *ngIf="nameField!.invalid && (nameField!.touched || formProduct.submitted)"
@@ -52,74 +52,88 @@
     "
     >Requerido</span
   >
+  <div class="form-flex-input">
+    <div>
 
-  <label for="price" class="label"
-    >Precio <i *ngIf="priceField!.valid" class="fa-solid fa-circle-check"></i
-  ></label>
-  <input
-    type="number"
-    id="price"
-    formControlName="price"
-    placeholder="Precio"
-  />
-  <span
-    class="validation"
-    *ngIf="
-      priceField!.invalid && (priceField!.touched || formProduct.submitted)
-    "
-    >Requerido</span
-  >
+      <label for="price" class="label"
+      >Precio <i *ngIf="priceField!.valid" class="fa-solid fa-circle-check"></i
+        ></label>
+        <input
+        type="number"
+        id="price"
+        class="input-flex-c"
+        formControlName="price"
+        placeholder="Precio"
+        />
+        <span
+        class="validation"
+        *ngIf="
+        priceField!.invalid && (priceField!.touched || formProduct.submitted)
+        "
+        >Requerido</span
+        >
+      </div>
+      <div>
 
-  <label for="stock" class="label"
-    >Stock <i *ngIf="stockField!.valid" class="fa-solid fa-circle-check"></i
-  ></label>
-  <input type="number" id="stock" formControlName="stock" placeholder="Stock" />
-  <span
-    class="validation"
-    *ngIf="
-      stockField!.invalid && (stockField!.touched || formProduct.submitted)
-    "
-    >Requerido</span
-  >
+        <label for="stock" class="label"
+        >Stock <i *ngIf="stockField!.valid" class="fa-solid fa-circle-check"></i
+          ></label>
+          <input type="number" id="stock" class="input-flex-c" formControlName="stock" placeholder="Stock" />
+        <span
+        class="validation"
+        *ngIf="
+        stockField!.invalid && (stockField!.touched || formProduct.submitted)
+        "
+        >Requerido</span
+        >
+      </div>
+        
+      </div>
+        <div class="form-flex-input">
+    <div>
 
-  <label for="productTypeId" class="label"
-    >Tipo de producto
-    <i *ngIf="productTypeIdField!.valid" class="fa-solid fa-circle-check"></i
-  ></label>
-  <select id="productTypeId" formControlName="productTypeId">
-    <option value="" [defaultSelected]="true">SELECCIONE</option>
-    <option
+      <label for="productTypeId" class="label"
+      >Tipo de producto
+      <i *ngIf="productTypeIdField!.valid" class="fa-solid fa-circle-check"></i
+    ></label>
+    <select id="productTypeId" formControlName="productTypeId" class="input-flex-c">
+      <option value="" [defaultSelected]="true">SELECCIONE</option>
+      <option
       *ngFor="let productType of productTypes"
       value="{{ productType.id }}"
-    >
+      >
       {{ productType.name }}
     </option>
   </select>
   <span
-    class="validation"
-    *ngIf="
-      productTypeIdField!.invalid &&
-      (productTypeIdField!.touched || formProduct.submitted)
+  class="validation"
+  *ngIf="
+  productTypeIdField!.invalid &&
+  (productTypeIdField!.touched || formProduct.submitted)
     "
     >Requerido</span
-  >
-
-  <label for="brandId" class="label"
+    >
+  </div>
+  <div>
+    
+    <label for="brandId" class="label"
     >Marca <i *ngIf="brandIdField!.valid" class="fa-solid fa-circle-check"></i
-  ></label>
-  <select formControlName="brandId">
+      ></label>
+  <select formControlName="brandId" class="input-flex-c">
     <option value="" [defaultSelected]="true">SELECCIONE</option>
     <option *ngFor="let brand of brands" value="{{ brand.id }}">
       {{ brand.name }}
     </option>
   </select>
   <span
-    class="validation"
-    *ngIf="
-      brandIdField!.invalid && (brandIdField!.touched || formProduct.submitted)
-    "
-    >Requerido</span
+  class="validation"
+  *ngIf="
+  brandIdField!.invalid && (brandIdField!.touched || formProduct.submitted)
+  "
+  >Requerido</span
   >
+</div>
+</div>
 
   <button class="btn-guardar" type="submit">Agregar</button>
 </form>

@@ -14,6 +14,7 @@
     type="text"
     formControlName="name"
     placeholder="Método de entrega"
+    autofocus="autofocus" onFocus="this.select()"
   />
   <span
     class="validation"
@@ -22,6 +23,22 @@
     "
     >Requerido</span
   >
-
+  <label for="priceByKm" class="label"
+    >Precio de envío
+    <i *ngIf="priceByKmField!.valid" class="fa-solid fa-circle-check"></i
+  ></label>
+  <input
+    id="priceByKm"
+    type="number"
+    formControlName="priceByKm"
+    placeholder="Precio de envío"
+  />
+  <span
+    class="validation"
+    *ngIf="
+      priceByKmField!.invalid && (priceByKmField!.touched || formDeliveryMethod.submitted)
+    "
+    >Requerido</span
+  >
   <button class="btn-guardar" type="submit">Agregar</button>
 </form>

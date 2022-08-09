@@ -94,7 +94,7 @@ export class ProductTypeFormComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: `ProductTypeo Actualizado con Éxito!`,
+          title: `Categoria Actualizada con Éxito!`,
           showConfirmButton: false,
           timer: 1500
         });

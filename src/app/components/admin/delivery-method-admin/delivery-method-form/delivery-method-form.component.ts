@@ -59,6 +59,7 @@ export class DeliveryMethodFormComponent implements OnInit {
     if (!this.deliveryMethodId) {
       this.formGroupDeliveryMethod = this.formBuilder.group({
         name: [null, [Validators.required]],
+        priceByKm: [null, [Validators.required]],
       });
     } else {
       this.getDeliveryMethod(this.deliveryMethodId);
@@ -68,23 +69,8 @@ export class DeliveryMethodFormComponent implements OnInit {
   get nameField() {
     return this.formGroupDeliveryMethod.get('name');
   }
-  get imageUrlField() {
-    return this.formGroupDeliveryMethod.get('imageUrl');
-  }
-  get descriptionField() {
-    return this.formGroupDeliveryMethod.get('description');
-  }
-  get stockField() {
-    return this.formGroupDeliveryMethod.get('stock');
-  }
-  get priceField() {
-    return this.formGroupDeliveryMethod.get('price');
-  }
-  get deliveryMethodIdField() {
-    return this.formGroupDeliveryMethod.get('deliveryMethodId');
-  }
-  get brandIdField() {
-    return this.formGroupDeliveryMethod.get('brandId');
+  get priceByKmField() {
+    return this.formGroupDeliveryMethod.get('priceByKm');
   }
 
   onSubmit(event: Event) {
@@ -104,6 +90,7 @@ export class DeliveryMethodFormComponent implements OnInit {
       this.formGroupDeliveryMethod = this.formBuilder.group({
         id: [this.deliveryMethod.id, [Validators.required]],
         name: [this.deliveryMethod.name, [Validators.required]],
+        priceByKm: [null, [Validators.required]],
       });
     });
   }

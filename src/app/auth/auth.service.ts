@@ -28,7 +28,7 @@ export class AuthService {
             if(rol == 'user'){
                 this.router.navigate(['/ecommerce/products']);
             }else if(rol == 'admin'){
-                this.router.navigate(['/admin/products']);
+                this.router.navigate(['/admin/product-types']);
             }
             this.loaderService.loaderState(false);
         });

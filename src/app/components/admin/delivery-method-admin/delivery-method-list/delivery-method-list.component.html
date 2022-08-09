@@ -3,6 +3,7 @@
 <table class="table-deliveryMethods">
   <thead class="thead">
     <td>MÉTODOS DE ENTREGA</td>
+    <td>PRECIO DE ENVÍO</td>
     <td>
       <a class="button-table" routerLink="/admin/delivery-methods/create"
         >Nuevo <i class="fa-solid fa-plus"></i
@@ -12,6 +13,7 @@
   <tbody *ngIf="deliveryMethods.length > 0">
     <tr *ngFor="let deliveryMethod of deliveryMethods">
       <td>{{ deliveryMethod.name }}</td>
+      <td>${{ deliveryMethod.priceByKm }}</td>
       <td class="buttons-flex">
         <a
           class="button-table"
