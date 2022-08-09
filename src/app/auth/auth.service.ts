@@ -18,7 +18,8 @@ export class AuthService {
     constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService, private loaderService: LoaderService) {
 
     }
-
+    
+    // Obtener Token, guardarlo en el localstorage, e iniciar sesion
     login(loginBody: Login, rol: string) {
         this.loaderService.loaderState();
         return this.http.post(`${this.API_URL}Token`, loginBody)
@@ -36,13 +37,15 @@ export class AuthService {
           
     private setSession(authResult: any) {
         localStorage.setItem('id_token', authResult);
-    }          
+    } 
 
+    //Remover token del localstorage y regresar al login
     logout() {
         localStorage.removeItem("id_token");
         this.router.navigate(['/login']);
     }
 
+    //Validar si el token ha expirado
     isAuthenticated(): boolean {
         const token = localStorage.getItem('id_token');
         return !this.jwtHelper.isTokenExpired(token!);

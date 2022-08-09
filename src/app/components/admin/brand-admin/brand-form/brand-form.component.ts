@@ -25,7 +25,8 @@ export class BrandFormComponent implements OnInit {
   ngOnInit(): void {
     this.buildformGroupBrand();
   }
-
+  
+  //Agrega marca llamando al servicio ecommerce y emite la marca creada
   addBrand(brand: Brand) {
     this.ecommerceService
       .post('Brand', this.formGroupBrand.getRawValue())
@@ -42,7 +43,7 @@ export class BrandFormComponent implements OnInit {
       });
   }
 
-  //Reactive Form, Validators and getters of Fields
+  //Reactive Form, Validators and getters 
   buildformGroupBrand() {
     this.id = this.route.snapshot.paramMap.get('id')!;
     if (!this.id) {
@@ -54,14 +55,15 @@ export class BrandFormComponent implements OnInit {
     }
   }
 
+  //Getters para validaciones desde html
   get nameField() {
     return this.formGroupBrand.get('name');
   }
-
   get idField() {
     return this.formGroupBrand.get('id');
   }
 
+  //Valida si existe el id para editar, caso contrario ejecuta metodo para crear nuevo registro
   onSubmit(event: Event) {
     event.preventDefault();
     if (this.id != null) {
@@ -73,6 +75,7 @@ export class BrandFormComponent implements OnInit {
     }
   }
 
+  //Obtiene las marcas llamando al servio ecommerce
   getBrand(id: string) {
     this.ecommerceService.get(`Brand/${id}`).subscribe((response) => {
       this.brand = response as Brand;
@@ -83,6 +86,7 @@ export class BrandFormComponent implements OnInit {
     });
   }
 
+  //Actualiza Marca
   updateBrand() {
     this.ecommerceService
       .put(`Brand`, this.formGroupBrand.getRawValue())

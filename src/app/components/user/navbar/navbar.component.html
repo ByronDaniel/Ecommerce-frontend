@@ -12,7 +12,9 @@
   <ul class="navbar-items">
     <li class="navbar-item">
       <a class="navbar-link" routerLink="/ecommerce/my-cart">
-        <i class="fa-solid fa-cart-shopping"></i> Mi Carrito
+        <i class="fa-solid fa-cart-shopping" ></i>
+        <span *ngIf="ecommerceService.quantity == 0"> Mi Carrito</span>
+        <span *ngIf="ecommerceService.quantity > 0"> Mi Carrito - {{ecommerceService.quantity}} Productos </span>
       </a>
     </li>
     <li class="navbar-item">

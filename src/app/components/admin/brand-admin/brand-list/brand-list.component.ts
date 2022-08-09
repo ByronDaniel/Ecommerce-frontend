@@ -19,6 +19,7 @@ export class BrandListComponent implements OnInit {
     this.getBrands();
   }
 
+  //Obtiene marcas ejecutando el servicio ecommerce
   getBrands() {
     this.loaderService.loaderState();
     this.ecommerceService
@@ -29,12 +30,13 @@ export class BrandListComponent implements OnInit {
       });
   }
 
+  //Elimina la marca enviando el id
   deleteBrand(brandId: string) {
     this.loaderService.loaderState();
     const swalWithBootstrapButtons = Swal.mixin({
       buttonsStyling: true,
     });
-
+    //Modal para confirmar eliminado
     swalWithBootstrapButtons
       .fire({
         title: 'Eliminar',

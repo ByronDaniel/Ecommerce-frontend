@@ -19,7 +19,8 @@ export class AdminNavbarComponent implements OnInit {
     });
   }
   ngOnInit(): void {}
-
+  
+  //Cerrar sesion llamando al servicio de auth
   logOut() {
     this.authService.logout();
   }

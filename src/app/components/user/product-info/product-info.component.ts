@@ -66,6 +66,7 @@ export class ProductInfoComponent implements OnInit {
               showConfirmButton: false,
               timer: 1000,
             });
+            this.ecommerceService.getQuantity();
           });
         this.closeModal.emit(true);
       });
@@ -80,6 +81,7 @@ export class ProductInfoComponent implements OnInit {
             showConfirmButton: false,
             timer: 1000,
           });
+          this.ecommerceService.getQuantity();
           this.closeModal.emit(true);
         });
     }

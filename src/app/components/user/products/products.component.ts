@@ -20,7 +20,9 @@ export class ProductsComponent implements OnInit {
     this.productSelected = product;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
   products: Product[] = [];
   productTypeSelected: string = '';
 

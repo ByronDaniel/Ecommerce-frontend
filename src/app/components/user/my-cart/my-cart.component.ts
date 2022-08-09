@@ -121,6 +121,7 @@ export class MyCartComponent implements OnInit {
               showConfirmButton: false,
               timer: 1000,
             });
+            this.ecommerceService.getQuantity();
             this.router.navigate(['/ecommerce/products']);
           });
       }
@@ -155,6 +156,7 @@ export class MyCartComponent implements OnInit {
                 showConfirmButton: false,
                 timer: 1000,
               });
+              this.ecommerceService.getQuantity();
               this.router.navigate(['/ecommerce/products']);
             });
         }
@@ -176,6 +178,7 @@ export class MyCartComponent implements OnInit {
       .delete(`Order/${orderId}/Product/${product.productId}`)
       .subscribe((response) => {
         this.getOrder();
+        this.ecommerceService.getQuantity();
       });
   }
 
@@ -189,6 +192,7 @@ export class MyCartComponent implements OnInit {
       .put(`Order/${orderId}/Product`, OrderProductQuantity)
       .subscribe((response) => {
         this.getOrder();
+        this.ecommerceService.getQuantity();
       });
   }
 }
